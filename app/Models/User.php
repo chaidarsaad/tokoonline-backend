@@ -10,7 +10,8 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable{
+class User extends Authenticatable
+{
     use HasApiTokens;
     use HasFactory;
     use HasProfilePhoto;
@@ -20,7 +21,7 @@ class User extends Authenticatable{
     /**
      * The attributes that are mass assignable.
      *
-     * @var array
+     * @var string[]
      */
     protected $fillable = [
         'name',
@@ -62,6 +63,6 @@ class User extends Authenticatable{
     ];
 
     public function transactions(){
-        return $this->hasMany(Transaction::class, 'users_id', 'id');
+        return $this->hasMany(Transaction::class, 'user_id', 'id');
     }
 }

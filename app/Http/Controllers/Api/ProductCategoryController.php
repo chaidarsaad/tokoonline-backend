@@ -1,14 +1,16 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\API;
 
 use App\Helpers\ResponseFormatter;
 use App\Http\Controllers\Controller;
 use App\Models\ProductCategory;
 use Illuminate\Http\Request;
 
-class ProductCategoryController extends Controller{
-    public function all(Request $request){
+class ProductCategoryController extends Controller
+{
+    public function all(Request $request)
+    {
         $id = $request->input('id');
         $limit = $request->input('limit');
         $name = $request->input('id');
@@ -16,20 +18,20 @@ class ProductCategoryController extends Controller{
 
         if($id){
             $category = ProductCategory::with(['products'])->find($id);
+
             if($category){
                 return ResponseFormatter::success(
                     $category,
-                    'Data kategori berhasil diambil'
+                    'Data Kategori Berhasil Diambil'
                 );
             } else {
                 return ResponseFormatter::error(
                     null,
-                    'Data kategori tidak ada',
+                    'Data Kategori Tidak Ada',
                     404
                 );
             }
         }
-
         $category = ProductCategory::query();
 
         if($name){
@@ -39,10 +41,9 @@ class ProductCategoryController extends Controller{
         if($show_product){
             $category->with('products');
         }
-
         return ResponseFormatter::success(
             $category->paginate($limit),
-            'Data list category berhasil diambil'
+            'Data Kategori Berhasil Diambil'
         );
     }
 }

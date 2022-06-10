@@ -7,11 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Storage;
 
-class ProductGallery extends Model{
-
+class ProductGallery extends Model
+{
     use HasFactory, SoftDeletes;
 
-    /**
+     /**
      * The attributes that are mass assignable.
      *
      * @var array
@@ -19,9 +19,9 @@ class ProductGallery extends Model{
     protected $fillable = [
         'products_id',
         'url',
-    ];
+       ];
 
-    public function getUrlAttribute($url){
-        return config('app.url') . Storage::url($url);
-    }
+       public function getUrlAttribute($url){
+           return config('app.url') . Storage::url($url);
+       }
 }
