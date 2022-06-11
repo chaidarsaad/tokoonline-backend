@@ -57,7 +57,7 @@ class TransactionController extends Controller
         ]);
 
         $transaction = Transaction::created([
-            'users_id' => Auth::user()->id,
+            'user_id' => Auth::user()->id,
             'address' => $request->address,
             'total_price' => $request->total_price,
             'shipping_price' => $request->shipping_price,
@@ -69,12 +69,9 @@ class TransactionController extends Controller
                 'user_id' => Auth::user()->id,
                 'products_id' => $product['id'],    
                 'transactions_id' => $transaction->id,
-               // 'transactions_id' => $transaction['id'],
                 'quantity' => $product['quantity'],
             ]);
         }
        return ResponseFormatter::success($transaction->load('items.product'), 'Transaksi Berhasil');
-    
-        // return ResponseFormatter::success($transaction()->load('items.product'), 'Transaksi Berhasil');
     }
 }       
