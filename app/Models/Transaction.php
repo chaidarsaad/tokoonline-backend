@@ -15,7 +15,7 @@ class Transaction extends Model{
      * @var array
      */
     protected $fillable = [
-        'users_id',
+        'user_id',
         'address',
         'payment',
         'total_price',
@@ -24,7 +24,7 @@ class Transaction extends Model{
     ];
     
     public function user(){
-        return $this->belongsTo(User::class, 'users_id', 'id');
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
     public function items(){
