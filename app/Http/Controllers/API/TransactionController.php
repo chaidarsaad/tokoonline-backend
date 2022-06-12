@@ -50,13 +50,13 @@ class TransactionController extends Controller
     {
         $request->validate([
             'items' => 'required|array',
-            'items.*.id' => 'exitsts:products,id',
+            'items.*.id' => 'exists:products,id',
             'total_price' => 'required',
             'shipping_price' => 'required',
             'status' => 'required|in:PENDING,SUCCESS,CANCELLED,FAILED,SHIPPING,SHIPPED'
         ]);
 
-        $transaction = Transaction::created([
+        $transaction = Transaction::create([
             'user_id' => Auth::user()->id,
             'address' => $request->address,
             'total_price' => $request->total_price,
@@ -65,8 +65,8 @@ class TransactionController extends Controller
         ]);
 
         foreach ($request -> items as $product) {
-            TransactionItem::created([
-                'user_id' => Auth::user()->id,
+            TransactionItem::create([
+                'users_id' => Auth::user()->id,
                 'products_id' => $product['id'],    
                 'transactions_id' => $transaction->id,
                 'quantity' => $product['quantity'],

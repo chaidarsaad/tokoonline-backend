@@ -49,16 +49,15 @@ class UserController extends Controller
         }
     }
 
-    public function login(Request $request)
-    {
-        try{
+    public function login(Request $request){
+        try {
             $request->validate([
                 'email' => 'email|required',
                 'password' => 'required'
             ]);
 
             $credentials = request(['email', 'password']);
-            if(!Auth::attemp($credentials)){
+            if(!Auth::attempt($credentials)){
                 return ResponseFormatter::error([
                     'message' => 'Unauthorized'
                 ], 'Authentication Failed', 500);
@@ -66,7 +65,7 @@ class UserController extends Controller
 
             $user = User::where('email', $request->email)->first();
 
-            if(! Hash::check($request->password, $user->password, [])){
+            if(!Hash::check($request->password, $user->password, [])){
                 throw new \Exception('Invalid Credentials');
             }
 
@@ -76,9 +75,9 @@ class UserController extends Controller
                 'token_type' => 'Bearer',
                 'user' => $user
             ], 'Authenticated');
-        } catch (Exception $error){
+        } catch (Exception $error) {
             return ResponseFormatter::error([
-                'message' => 'Something went wrong',
+                'message' => 'Somethig went wrong',
                 'error' => $error
             ], 'Authentication Failed', 500);
         }
