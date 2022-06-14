@@ -30,6 +30,9 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
             Route::resource('product.gallery', ProductGalleryController::class)->shallow()->only([
                 'index', 'create', 'store', 'destroy'
             ]);
+            Route::resource('transaction', TransactionController::class)->only([
+                'index', 'show', 'edit', 'update'
+            ]);
         });
     });
 });
