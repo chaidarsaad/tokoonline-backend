@@ -27,6 +27,9 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
         Route::middleware(['admin'])->group(function () {
             Route::resource('product', ProductController::class);
             Route::resource('category', ProductCategoryController::class);
+            Route::resource('product.gallery', ProductGalleryController::class)->shallow()->only([
+                'index', 'create', 'store', 'destroy'
+            ]);
         });
     });
 });
