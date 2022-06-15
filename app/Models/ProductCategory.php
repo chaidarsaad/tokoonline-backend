@@ -10,16 +10,12 @@ class ProductCategory extends Model
 {
     use HasFactory, SoftDeletes;
     
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     protected $fillable = [
-        'name',
-    ];
+        'name', 
+    ];    
 
-    public function products(){
+    public function products()
+    {
         return $this->hasMany(Product::class, 'categories_id', 'id');
     }
 }
